@@ -12,16 +12,22 @@
 		1D5B74221D84897A001E1A15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D5B74201D84897A001E1A15 /* Main.storyboard */; };
 		1D5B74241D84897A001E1A15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D5B74231D84897A001E1A15 /* Assets.xcassets */; };
 		1D5B74271D84897A001E1A15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D5B74251D84897A001E1A15 /* LaunchScreen.storyboard */; };
+		1D5B74311D8489F0001E1A15 /* SetDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B74301D8489F0001E1A15 /* SetDateController.swift */; };
+		1D5B74331D859D9C001E1A15 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D5B74321D859D9C001E1A15 /* iAd.framework */; };
+		1D5B74351D862623001E1A15 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B74341D862623001E1A15 /* CheckBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D5B74191D84897A001E1A15 /* PassData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassData.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D5B74191D84897A001E1A15 /* DisneyCountDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DisneyCountDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D5B741C1D84897A001E1A15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D5B741E1D84897A001E1A15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D5B74211D84897A001E1A15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D5B74231D84897A001E1A15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D5B74261D84897A001E1A15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D5B74281D84897A001E1A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D5B74301D8489F0001E1A15 /* SetDateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDateController.swift; sourceTree = "<group>"; };
+		1D5B74321D859D9C001E1A15 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		1D5B74341D862623001E1A15 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D5B74331D859D9C001E1A15 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,7 +45,8 @@
 		1D5B74101D84897A001E1A15 = {
 			isa = PBXGroup;
 			children = (
-				1D5B741B1D84897A001E1A15 /* PassData */,
+				1D5B74321D859D9C001E1A15 /* iAd.framework */,
+				1D5B741B1D84897A001E1A15 /* DisneyCountDown */,
 				1D5B741A1D84897A001E1A15 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,12 +54,12 @@
 		1D5B741A1D84897A001E1A15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D5B74191D84897A001E1A15 /* PassData.app */,
+				1D5B74191D84897A001E1A15 /* DisneyCountDown.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1D5B741B1D84897A001E1A15 /* PassData */ = {
+		1D5B741B1D84897A001E1A15 /* DisneyCountDown */ = {
 			isa = PBXGroup;
 			children = (
 				1D5B741C1D84897A001E1A15 /* AppDelegate.swift */,
@@ -60,16 +68,19 @@
 				1D5B74231D84897A001E1A15 /* Assets.xcassets */,
 				1D5B74251D84897A001E1A15 /* LaunchScreen.storyboard */,
 				1D5B74281D84897A001E1A15 /* Info.plist */,
+				1D5B74301D8489F0001E1A15 /* SetDateController.swift */,
+				1D5B74341D862623001E1A15 /* CheckBox.swift */,
 			);
+			name = DisneyCountDown;
 			path = PassData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D5B74181D84897A001E1A15 /* PassData */ = {
+		1D5B74181D84897A001E1A15 /* DisneyCountDown */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D5B742B1D84897A001E1A15 /* Build configuration list for PBXNativeTarget "PassData" */;
+			buildConfigurationList = 1D5B742B1D84897A001E1A15 /* Build configuration list for PBXNativeTarget "DisneyCountDown" */;
 			buildPhases = (
 				1D5B74151D84897A001E1A15 /* Sources */,
 				1D5B74161D84897A001E1A15 /* Frameworks */,
@@ -79,9 +90,9 @@
 			);
 			dependencies = (
 			);
-			name = PassData;
+			name = DisneyCountDown;
 			productName = PassData;
-			productReference = 1D5B74191D84897A001E1A15 /* PassData.app */;
+			productReference = 1D5B74191D84897A001E1A15 /* DisneyCountDown.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -100,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1D5B74141D84897A001E1A15 /* Build configuration list for PBXProject "PassData" */;
+			buildConfigurationList = 1D5B74141D84897A001E1A15 /* Build configuration list for PBXProject "DisneyCountDown" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -113,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D5B74181D84897A001E1A15 /* PassData */,
+				1D5B74181D84897A001E1A15 /* DisneyCountDown */,
 			);
 		};
 /* End PBXProject section */
@@ -136,6 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D5B74351D862623001E1A15 /* CheckBox.swift in Sources */,
+				1D5B74311D8489F0001E1A15 /* SetDateController.swift in Sources */,
 				1D5B741F1D84897A001E1A15 /* ViewController.swift in Sources */,
 				1D5B741D1D84897A001E1A15 /* AppDelegate.swift in Sources */,
 			);
@@ -250,10 +263,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PassData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pearce.PassData;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pearce.DisneyCountDown;
+				PRODUCT_NAME = DisneyCountDown;
 			};
 			name = Debug;
 		};
@@ -261,17 +276,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PassData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pearce.PassData;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pearce.DisneyCountDown;
+				PRODUCT_NAME = DisneyCountDown;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D5B74141D84897A001E1A15 /* Build configuration list for PBXProject "PassData" */ = {
+		1D5B74141D84897A001E1A15 /* Build configuration list for PBXProject "DisneyCountDown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D5B74291D84897A001E1A15 /* Debug */,
@@ -280,13 +297,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1D5B742B1D84897A001E1A15 /* Build configuration list for PBXNativeTarget "PassData" */ = {
+		1D5B742B1D84897A001E1A15 /* Build configuration list for PBXNativeTarget "DisneyCountDown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D5B742C1D84897A001E1A15 /* Debug */,
 				1D5B742D1D84897A001E1A15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

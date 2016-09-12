@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:PassData.xcodeproj">
+      location = "self:/Users/rick/PassData/DisneyCountDown.xcodeproj">
    </FileRef>
 </Workspace>

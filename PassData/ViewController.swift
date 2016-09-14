@@ -100,7 +100,7 @@ class ViewController: UIViewController, ADBannerViewDelegate {
         //let sourceViewController = sender.sourceViewController as? SecondViewController
         let selectedDate = defaults.objectForKey(defaultsKeys.dateKey) as? NSDate
         let eventName = defaults.stringForKey(defaultsKeys.eventKey)
-        //print("Event name: \(eventName)")
+        
         dateLabel.text = formatter.stringFromDate(selectedDate!)
         daysUntil.text = daysBetweenDates(NSDate(), endDate: selectedDate!)
         eventLabel.text = eventName

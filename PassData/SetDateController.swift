@@ -36,8 +36,11 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet weak var ccLevelPicker: UIPickerView!
     @IBOutlet weak var eventName: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var selectedDateLabel: UILabel!
     
     let pickerData = ["First Cruise", "Silver", "Gold", "Platinum", "Concierge"]
+    let dateFormatter = NSDateFormatter()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,7 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         ccLevelPicker.delegate = self
         
         datePicker.date = defaults.objectForKey(defaultKeys.dateKey) as! NSDate
+        formatDate()
         eventName.text = defaults.stringForKey(defaultKeys.eventKey)
         chkParks.isChecked = defaults.boolForKey(defaultKeys.parksKey)
         chkCruise.isChecked = defaults.boolForKey(defaultKeys.cruiseKey)
@@ -55,6 +59,7 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                 let indexOfSelectedCCLevel = pickerData.indexOf(ccLevelValue)
                 //print(indexOfSelectedCCLevel)
                 ccLevelPicker.selectRow(indexOfSelectedCCLevel!, inComponent: 0, animated: false)
+                ccLevel = ccLevelValue
             }
             
         }
@@ -87,7 +92,8 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             defaults.setBool(chkParks.isChecked, forKey: defaultKeys.parksKey)
             defaults.setBool(chkCruise.isChecked, forKey: defaultKeys.cruiseKey)
             if chkCruise.isChecked {
-                defaults.setValue(ccLevel, forKey: defaultKeys.ccLevelKey)
+                
+                defaults.setValue(pickerData[ccLevelPicker.selectedRowInComponent(0)], forKey: defaultKeys.ccLevelKey)
             }
             
             //defaults.synchronize()
@@ -95,6 +101,16 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         }
         
         
+    }
+    
+    func formatDate() {
+        dateFormatter.dateStyle = .FullStyle
+        selectedDateLabel.text = dateFormatter.stringFromDate(datePicker.date)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+        eventName.resignFirstResponder()
+        super.touchesBegan(touches, withEvent: event)
     }
     
     //MARK: Data Sources
@@ -131,6 +147,9 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 //        chkCruise.setBackgroundImage(UIImage(named: "cb-on"), forState: .Selected)
         ccView.hidden = !ccView.hidden
         
+    }
+    @IBAction func dateChanged(sender: AnyObject) {
+        formatDate()
     }
     
 

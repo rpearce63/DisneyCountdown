@@ -16,9 +16,11 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var daysUntilADR: UILabel!
     @IBOutlet weak var daysUntilFP: UILabel!
+    @IBOutlet weak var cruiseCheckInDate: UILabel!
+    @IBOutlet weak var cruiseCheckInView: UIView!
     
     
-    var rectangleAdView :ADBannerView?
+    //var rectangleAdView :ADBannerView?
     
     
     let formatter = NSDateFormatter()
@@ -33,18 +35,18 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     
     let defaults = NSUserDefaults.standardUserDefaults()
 
-    
+    let ccLevelDates: [String: Int] = ["First Cruise": -75, "Silver": -90, "Gold": -105, "Platinum": -120, "Concierge": -120]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "IMG_0132")!)
-        self.canDisplayBannerAds = true
+        //self.canDisplayBannerAds = true
         // Do any additional setup after loading the view, typically from a nib.
         
         formatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        rectangleAdView = ADBannerView(adType: ADAdType.MediumRectangle)
-        rectangleAdView?.delegate = self
+        //rectangleAdView = ADBannerView(adType: ADAdType.MediumRectangle)
+        //rectangleAdView?.delegate = self
     
         //dateLabel.text = formatter.stringFromDate(NSDate())
         //eventLabel.text = defaults.stringForKey(defaultsKeys.eventKey)
@@ -62,7 +64,7 @@ class ViewController: UIViewController, ADBannerViewDelegate {
             dateLabel.text = formatter.stringFromDate(NSDate())
         }
         
-        print(defaults.stringForKey(defaultsKeys.ccLevelKey))
+        //print(defaults.stringForKey(defaultsKeys.ccLevelKey))
          
         
         
@@ -77,9 +79,9 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pickDate" {
-            let nav = segue.destinationViewController as! UINavigationController
-            nav.interstitialPresentationPolicy =
-                ADInterstitialPresentationPolicy.Automatic
+            //let nav = segue.destinationViewController as! UINavigationController
+            //nav.interstitialPresentationPolicy =
+                //ADInterstitialPresentationPolicy.Automatic
             //let setDateController = nav.topViewController as! SecondViewController
             //setDateController.selectedDate = formatter.dateFromString(dateLabel.text!)
             //setDateController.event = eventLabel.text!
@@ -120,22 +122,30 @@ class ViewController: UIViewController, ADBannerViewDelegate {
         let calendar = NSCalendar.currentCalendar()
 
         let adrDate = calendar.dateByAddingUnit( [.Day], value: -180, toDate: arrivalDate, options: [] )!
-        let fpDate = calendar.dateByAddingUnit( [.Day], value: -60, toDate: NSDate(), options: [] )!
+        let fpDate = calendar.dateByAddingUnit( [.Day], value: -60, toDate: arrivalDate, options: [] )!
+        if defaults.boolForKey(defaultsKeys.cruiseKey) {
+            let checkInDate = calendar.dateByAddingUnit([.Day], value: ccLevelDates[defaults.stringForKey(defaultsKeys.ccLevelKey)!]!, toDate: arrivalDate, options: [])!
+            cruiseCheckInView.hidden = false
+            cruiseCheckInDate.text = formatter.stringFromDate(checkInDate)
+        } else {
+            cruiseCheckInView.hidden = true
+        }
         
         daysUntilADR.text = formatter.stringFromDate(adrDate)
         daysUntilFP.text = formatter.stringFromDate(fpDate)
+        
     }
     
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        self.view.addSubview(banner)
-        self.view.layoutIfNeeded()
-    }
-    
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError
-        error: NSError!) {
-        banner.removeFromSuperview()
-        self.view.layoutIfNeeded()
-    }
+//    func bannerViewDidLoadAd(banner: ADBannerView!) {
+//        self.view.addSubview(banner)
+//        self.view.layoutIfNeeded()
+//    }
+//    
+//    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError
+//        error: NSError!) {
+//        banner.removeFromSuperview()
+//        self.view.layoutIfNeeded()
+//    }
 
 }
 

@@ -18,10 +18,8 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     @IBOutlet weak var daysUntilFP: UILabel!
     @IBOutlet weak var cruiseCheckInDate: UILabel!
     @IBOutlet weak var cruiseCheckInView: UIView!
-    
-    
-    //var rectangleAdView :ADBannerView?
-    
+    @IBOutlet weak var parkDatesView: UIView!
+    @IBOutlet weak var image: UIImageView!
     
     let formatter = NSDateFormatter()
     
@@ -38,19 +36,14 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     let ccLevelDates: [String: Int] = ["First Cruise": -75, "Silver": -90, "Gold": -105, "Platinum": -120, "Concierge": -120]
     
     
+    var imageList:[String] = ["castle.png", "IMG_0132.png", "main background.png"]
+    let maxImages = 2
+    var imageIndex: NSInteger = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "IMG_0132")!)
-        //self.canDisplayBannerAds = true
-        // Do any additional setup after loading the view, typically from a nib.
         
         formatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        //rectangleAdView = ADBannerView(adType: ADAdType.MediumRectangle)
-        //rectangleAdView?.delegate = self
-    
-        //dateLabel.text = formatter.stringFromDate(NSDate())
-        //eventLabel.text = defaults.stringForKey(defaultsKeys.eventKey)
-        
         
         if let stringOne = defaults.stringForKey(defaultsKeys.eventKey) {
             eventLabel.text = stringOne
@@ -64,12 +57,18 @@ class ViewController: UIViewController, ADBannerViewDelegate {
             dateLabel.text = formatter.stringFromDate(NSDate())
         }
         
-        //print(defaults.stringForKey(defaultsKeys.ccLevelKey))
-         
+        image.userInteractionEnabled = true
         
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.swiped(_:))) // put : at the end of method name
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        image.addGestureRecognizer(swipeRight)
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.swiped(_:))) // put : at the end of method name
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        image.addGestureRecognizer(swipeLeft)
         
+        image.image = UIImage(named:"castle.png")
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,15 +78,8 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pickDate" {
-            //let nav = segue.destinationViewController as! UINavigationController
-            //nav.interstitialPresentationPolicy =
-                //ADInterstitialPresentationPolicy.Automatic
-            //let setDateController = nav.topViewController as! SecondViewController
-            //setDateController.selectedDate = formatter.dateFromString(dateLabel.text!)
-            //setDateController.event = eventLabel.text!
             defaults.setObject(dateLabel.text == nil ? NSDate() : formatter.dateFromString(dateLabel.text!), forKey: defaultsKeys.dateKey)
             defaults.setValue(eventLabel.text, forKey: defaultsKeys.eventKey)
-            //defaults.synchronize()
             
         }
     }
@@ -97,7 +89,6 @@ class ViewController: UIViewController, ADBannerViewDelegate {
 
     @IBAction func unwindToMainView(sender: UIStoryboardSegue) {
         
-        //let sourceViewController = sender.sourceViewController as? SecondViewController
         let selectedDate = defaults.objectForKey(defaultsKeys.dateKey) as? NSDate
         let eventName = defaults.stringForKey(defaultsKeys.eventKey)
         
@@ -120,9 +111,15 @@ class ViewController: UIViewController, ADBannerViewDelegate {
     
     func setDaysUntilADRsAndFP(arrivalDate: NSDate) {
         let calendar = NSCalendar.currentCalendar()
-
-        let adrDate = calendar.dateByAddingUnit( [.Day], value: -180, toDate: arrivalDate, options: [] )!
-        let fpDate = calendar.dateByAddingUnit( [.Day], value: -60, toDate: arrivalDate, options: [] )!
+        if defaults.boolForKey(defaultsKeys.parksKey) {
+            let adrDate = calendar.dateByAddingUnit( [.Day], value: -180, toDate: arrivalDate, options: [] )!
+            let fpDate = calendar.dateByAddingUnit( [.Day], value: -60, toDate: arrivalDate, options: [] )!
+            parkDatesView.hidden = false
+            daysUntilADR.text = formatter.stringFromDate(adrDate)
+            daysUntilFP.text = formatter.stringFromDate(fpDate)
+        } else {
+            parkDatesView.hidden = true
+        }
         if defaults.boolForKey(defaultsKeys.cruiseKey) {
             let checkInDate = calendar.dateByAddingUnit([.Day], value: ccLevelDates[defaults.stringForKey(defaultsKeys.ccLevelKey)!]!, toDate: arrivalDate, options: [])!
             cruiseCheckInView.hidden = false
@@ -130,22 +127,62 @@ class ViewController: UIViewController, ADBannerViewDelegate {
         } else {
             cruiseCheckInView.hidden = true
         }
-        
-        daysUntilADR.text = formatter.stringFromDate(adrDate)
-        daysUntilFP.text = formatter.stringFromDate(fpDate)
-        
     }
     
-//    func bannerViewDidLoadAd(banner: ADBannerView!) {
-//        self.view.addSubview(banner)
-//        self.view.layoutIfNeeded()
-//    }
-//    
-//    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError
-//        error: NSError!) {
-//        banner.removeFromSuperview()
-//        self.view.layoutIfNeeded()
-//    }
+    func swiped(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+                
+            case UISwipeGestureRecognizerDirection.Right :
+                //print("User swiped right")
+                
+                // decrease index first
+                
+                imageIndex -= 1
+                
+                // check if index is in range
+                
+                if imageIndex < 0 {
+                    
+                    imageIndex = maxImages
+                    
+                }
+                
+                image.image = UIImage(named: imageList[imageIndex])
+                
+            case UISwipeGestureRecognizerDirection.Left:
+                //print("User swiped Left")
+                
+                // increase index first
+                
+                imageIndex += 1
+                
+                // check if index is in range
+                
+                if imageIndex > maxImages {
+                    
+                    imageIndex = 0
+                    
+                }
+                
+                image.image = UIImage(named: imageList[imageIndex])
+                
+                
+                
+                
+            default:
+                break //stops the code/codes nothing.
+                
+                
+            }
+            
+        }
+        
+        
+    }
+
 
 }
 

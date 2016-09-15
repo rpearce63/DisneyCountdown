@@ -41,8 +41,7 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     let pickerData = ["First Cruise", "Silver", "Gold", "Platinum", "Concierge"]
     let dateFormatter = NSDateFormatter()
     
-    
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
         ccLevelPicker.dataSource = self
         ccLevelPicker.delegate = self
@@ -84,9 +83,6 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if saveButton === sender {
-            //selectedDate = datePicker.date
-            //event = eventName.text
-            
             defaults.setValue(eventName.text, forKey: defaultKeys.eventKey)
             defaults.setObject(datePicker.date, forKey: defaultKeys.dateKey)
             defaults.setBool(chkParks.isChecked, forKey: defaultKeys.parksKey)
@@ -95,9 +91,7 @@ class SecondViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                 
                 defaults.setValue(pickerData[ccLevelPicker.selectedRowInComponent(0)], forKey: defaultKeys.ccLevelKey)
             }
-            
-            //defaults.synchronize()
-            
+                        
         }
         
         
